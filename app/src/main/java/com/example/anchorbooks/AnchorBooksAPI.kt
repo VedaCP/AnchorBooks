@@ -9,7 +9,7 @@ interface AnchorBooksAPI {
     @GET ("books")
     suspend fun fetchAnchorBooksList(): Response<List<AnchorBooksEntity>>
 
-    @GET("bookDetail/{bookDetail}")
-    suspend fun fetchAnchorBookDetail(@Path("bookDetail") bookDetail : Int)
-    : Response<List<Int>>
+    @GET("bookDetail/{id}")
+    suspend fun fetchBookDetailEntity(@Path("id") id : Int)
+    : Response<BookDetailEntity>
 }

@@ -9,7 +9,7 @@ import androidx.room.RoomDatabase
 
 abstract class AnchorBooksDB: RoomDatabase() {
 
-    abstract fun getAnchorBooksDAO(): AnchorBooksDAO
+    abstract fun getAnchorBooksDAO(): AnchorBooksDao
 
     companion object{
         @Volatile

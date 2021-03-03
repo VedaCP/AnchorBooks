@@ -32,12 +32,16 @@ class AdapterDetail: RecyclerView.Adapter<AdapterDetail.DetailVH>() {
     inner class DetailVH(private val binding: ItemDetailBinding):
             RecyclerView.ViewHolder(binding.root), View.OnClickListener{
                 fun bind (bookDetailEntity: BookDetailEntity){
-                    Glide.with(binding.ivImageLink2).load(bookDetailEntity.id)
+                    Glide.with(binding.ivImageLink2).load(bookDetailEntity.imageLink)
+                        .into(binding.ivImageLink2)
+                    binding.sDelivery.isClickable = false
 
+                    itemView.setOnClickListener(this)
                 }
 
         override fun onClick(v: View?): Boolean {
             itemDetail.value = listBookDetail[adapterPosition]
+            return true
         }
     }
 

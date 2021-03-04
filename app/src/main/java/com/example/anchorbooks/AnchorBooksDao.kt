@@ -6,7 +6,7 @@ import androidx.room.*
 @Dao
 interface AnchorBooksDao {
 
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun insertAllAnchorBooksDao(list: List<AnchorBooksEntity>)
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
@@ -17,6 +17,9 @@ interface AnchorBooksDao {
 
     @Query("SELECT * FROM detail_table WHERE id = :id")
     fun getAnchorBookDetail(id: Int) : LiveData<List<BookDetailEntity>>
+
+    @Update
+    suspend fun updateAnchorBooksEntity(anchorBooksEntity: AnchorBooksEntity)
 
 
 

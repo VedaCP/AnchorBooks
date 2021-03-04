@@ -14,7 +14,7 @@ class AnchorBooksRepository(private val dao: AnchorBooksDao) {
         converter.map {
             converterABEntity.add(AnchorBooksEntity(id = it.id, author = it.author,
                 country = it.country, imageLink = it.imageLink, language = it.language,
-                title = it.title))
+                title = it.title, fav = true))
         }
         return converterABEntity
     }
@@ -65,6 +65,9 @@ class AnchorBooksRepository(private val dao: AnchorBooksDao) {
     }
     fun getAllAnchorBooksDaoDB(id: Int): LiveData<List<BookDetailEntity>> {
         return dao.getAnchorBookDetail(id)
+    }
+    suspend fun updateFav(anchorBooksEntity: AnchorBooksEntity) {
+        dao.updateAnchorBooksEntity(anchorBooksEntity)
     }
 
 

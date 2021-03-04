@@ -21,7 +21,10 @@ class AnchorBooksViewModel (application: Application): AndroidViewModel(applicat
     }
     fun getAllAnchorBooksDaoDB(): LiveData<List<AnchorBooksEntity>> = repository.listABooks
 
-    fun getAnchorBookDetail(id:Int) = viewModelScope.launch {
-        repository.getBookDetail(id)
+    fun getBookDetail(id:Int): LiveData<List<BookDetailEntity>> =
+            repository.getAllAnchorBooksDaoDB(id)
+
+    fun updateFav(anchorBooksEntity: AnchorBooksEntity) = viewModelScope.launch {
+        repository.updateFav(anchorBooksEntity)
     }
 }

@@ -21,7 +21,7 @@ abstract class AnchorBooksDB: RoomDatabase() {
             }
             synchronized(this){
                 val instance = Room.databaseBuilder(context.applicationContext,
-                AnchorBooksDB::class.java, "AnchorBooksDB").build()
+                AnchorBooksDB::class.java, "booksDB").build()
                 INSTANCE = instance
                 return instance
             }

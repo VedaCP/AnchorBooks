@@ -6,7 +6,8 @@ data class BooksList (val id: Int,
                       val  country: String,
                       val imageLink: String,
                       var language: String,
-                      val title: String
+                      val title: String,
+                      val fav: Boolean
 )
 
 

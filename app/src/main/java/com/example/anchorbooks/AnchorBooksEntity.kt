@@ -18,5 +18,5 @@ data class AnchorBooksEntity(@SerializedName ("id")
                              @SerializedName ("title")
                              val title: String,
                              @SerializedName("fav")
-                             val fav: Boolean
+                             var fav: Boolean
 )

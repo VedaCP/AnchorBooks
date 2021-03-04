@@ -7,25 +7,43 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.GridLayoutManager
+import com.example.anchorbooks.databinding.FragmentFirstBinding
+import com.example.anchorbooks.databinding.FragmentSecondBinding
+import androidx.fragment.app.activityViewModels
+import java.util.*
 
-/**
- * A simple [Fragment] subclass as the second destination in the navigation.
- */
 class SecondFragment : Fragment() {
+
+    private lateinit var binding: FragmentSecondBinding
+    private val viewModel: AnchorBooksViewModel by activityViewModels()
+    var idImage: Int = 0
 
     override fun onCreateView(
             inflater: LayoutInflater, container: ViewGroup?,
             savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_second, container, false)
+        binding = FragmentSecondBinding.inflate(inflater, container, false)
+        return binding.root
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        if (arguments != null) {
+            idImage = requireArguments().getInt("LISTA")
+        }
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        var adapter = AdapterDetail()
+        binding.rvDetail.adapter = adapter
+        binding.rvDetail.layoutManager = GridLayoutManager(context, 1)
 
-        view.findViewById<Button>(R.id.button_second).setOnClickListener {
-            findNavController().navigate(R.id.action_SecondFragment_to_FirstFragment)
-        }
+        viewModel.getBookDetail(idImage).observe(viewLifecycleOwner, androidx.lifecycle.Observer {
+            it?.let {
+                adapter.update(it)
+            }
+        })
     }
 }

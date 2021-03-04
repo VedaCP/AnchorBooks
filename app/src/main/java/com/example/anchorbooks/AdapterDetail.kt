@@ -3,6 +3,8 @@ package com.example.anchorbooks
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.webkit.WebSettings
+import android.webkit.WebViewClient
 import androidx.lifecycle.MutableLiveData
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
@@ -18,7 +20,7 @@ class AdapterDetail: RecyclerView.Adapter<AdapterDetail.DetailVH>() {
         notifyDataSetChanged()
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AdapterDetail.DetailVH {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DetailVH {
         return DetailVH(ItemDetailBinding.inflate(LayoutInflater.from(parent.context)))
     }
 
@@ -35,13 +37,22 @@ class AdapterDetail: RecyclerView.Adapter<AdapterDetail.DetailVH>() {
                     Glide.with(binding.ivImageLink2).load(bookDetailEntity.imageLink)
                         .into(binding.ivImageLink2)
                     binding.sDelivery.isClickable = false
-
+                    binding.sDelivery.isChecked = bookDetailEntity.delivery
+                    binding.tvAuthor.text = bookDetailEntity.author
+                    binding.tvCountry.text = bookDetailEntity.country
+                    binding.tvLanguage.text = bookDetailEntity.language
+                    binding.tvPages.text = bookDetailEntity.pages.toString()
+                    binding.tvPrice.text = bookDetailEntity.price.toString()
+                    binding.wvLink.loadUrl(bookDetailEntity.link)
+                    binding.wvLink.webViewClient =  object : WebViewClient(){}
+                    val setting: WebSettings = binding.wvLink.settings
+                    setting.javaScriptEnabled = true
+                    binding.wvLink.loadUrl(bookDetailEntity.link)
                     itemView.setOnClickListener(this)
-                }
+                    }
 
-        override fun onClick(v: View?): Boolean {
+        override fun onClick(v: View?) {
             itemDetail.value = listBookDetail[adapterPosition]
-            return true
         }
     }
 

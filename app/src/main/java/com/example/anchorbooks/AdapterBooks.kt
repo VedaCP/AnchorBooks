@@ -35,6 +35,8 @@ class AdapterBooks: RecyclerView.Adapter<AdapterBooks.BooksVH> () {
                     }
                     binding.tvTitle.text = anchorBooksEntity.title
 
+                    itemView.setOnClickListener(this)
+
                 }
 
         override fun onClick(v: View?) {

@@ -7,8 +7,6 @@ class AnchorBooksRepository(private val dao: AnchorBooksDao) {
 
     val listABooks: LiveData<List<AnchorBooksEntity>> = dao.getAllAnchorBooksDaoDB()
 
-    //val listDetailBook = dao.getAllDetailBook() //All fav image
-
     fun converter(converter: List<BooksList>): List<AnchorBooksEntity> {
         val converterABEntity: MutableList<AnchorBooksEntity> = mutableListOf()
         converter.map {
@@ -21,10 +19,10 @@ class AnchorBooksRepository(private val dao: AnchorBooksDao) {
 
     fun bookDetail(id: Int, author: String, country: String, imageLink: String, language: String,
                    link: String, pages: Int, title: String, year: Int, price: Int,
-                   lastPrice: Int, delivery: Boolean): List<BookDetail> {
-        val listBookDetail: MutableList<BookDetail> = mutableListOf()
+                   lastPrice: Int, delivery: Boolean): List<BookDetailEntity> {
+        val listBookDetail: MutableList<BookDetailEntity> = mutableListOf()
         listBookDetail.add(
-            BookDetail(
+            BookDetailEntity(
                 id = id, author = author, country = country, imageLink = imageLink,
                 language = language, link = link, pages = pages, title = title,
                 year = year, price = price, lastPrice = lastPrice,
@@ -38,7 +36,7 @@ class AnchorBooksRepository(private val dao: AnchorBooksDao) {
             val response = AnchorBooksRetrofitClient.retrofitInstance().fetchAnchorBooksList()
             when (response.isSuccessful){
                 true -> response.body()?.let{
-                    dao.insertAllAnchorBooksDao(converter(it.bookList))
+                    dao.insertAllAnchorBooksDao(it)
                 }
                 false -> Log.d("ERROR", "${response.code()} : ${response.errorBody()}")
             }
@@ -47,7 +45,7 @@ class AnchorBooksRepository(private val dao: AnchorBooksDao) {
             Log.e("ERROR COROUTINE", t.message.toString())
         }
     }
-    suspend fun getBookDetail(id:Int){
+   suspend fun getBookDetail(id:Int){
         try {
             val response = AnchorBooksRetrofitClient.retrofitInstance().fetchBookDetailEntity(id)
             when (response.isSuccessful){

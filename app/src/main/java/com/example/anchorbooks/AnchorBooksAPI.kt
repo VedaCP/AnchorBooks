@@ -6,10 +6,10 @@ import retrofit2.http.Path
 
 interface AnchorBooksAPI {
 
-    @GET ("db")
-    suspend fun fetchAnchorBooksList(): Response<AnchorBooksResponse>
+    @GET ("books")
+    suspend fun fetchAnchorBooksList(): Response<List<AnchorBooksEntity>>
 
     @GET("bookDetail/{id}")
     suspend fun fetchBookDetailEntity(@Path("id") id : Int)
-    : Response<BookDetail>
+    : Response<AnchorBookDetail>
 }

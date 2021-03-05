@@ -30,7 +30,7 @@ class SecondFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         if (arguments != null) {
-            idImage = requireArguments().getInt("LISTA")
+            idImage = requireArguments().getInt("Lista")
         }
     }
 

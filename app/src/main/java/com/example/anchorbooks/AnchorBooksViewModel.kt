@@ -19,7 +19,8 @@ class AnchorBooksViewModel (application: Application): AndroidViewModel(applicat
         }
         aBooksLiveDataFromDB = repository.listABooks
     }
-    fun getAllAnchorBooksDaoDB(): LiveData<List<AnchorBooksEntity>> = repository.listABooks
+    fun returnBookDetail(id:Int): LiveData<List<BookDetailEntity>> =
+    repository.getAllAnchorBooksDaoDB(id)
 
     fun getBookDetail(id:Int): LiveData<List<BookDetailEntity>> =
             repository.getAllAnchorBooksDaoDB(id)

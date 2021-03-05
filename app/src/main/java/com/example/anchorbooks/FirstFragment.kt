@@ -42,7 +42,7 @@ class FirstFragment : Fragment() {
                 val bundle = Bundle()
                 bundle.putInt("Lista", it.id)
                 viewModelBook.getBookDetail(it.id)
-                findNavController().navigate(R.id.action_FirstFragment_to_SecondFragment)
+                findNavController().navigate(R.id.action_FirstFragment_to_SecondFragment, bundle)
             }
         })
 
